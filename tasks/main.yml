@@ -1,2 +1,14 @@
 ---
 # tasks file for docker
+
+- name: Check whether docker is already installed for linux
+  command: "docker version"
+  failed_when: false
+  changed_when: false
+  register: version_check_result
+
+- set_fact:
+    is_installed: "{{ version_check_result.rc == 0 }}"
+
+- include: "{{ ansible_os_family }}.yml"
+  when: not is_installed
