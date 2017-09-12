@@ -1,21 +1,10 @@
 ---
 # tasks file for docker
 
-# - name: Check whether docker is already installed for linux
-#   command: "docker version"
-#   failed_when: false
-#   changed_when: false
-#   register: version_check_result
-#   when: ansible_os_family!="Windows"
+- name: Include linux.yml in {{ ansible_distribution }}
+  include: linux.yml
+  when: ansible_os_family!="Windows"
 
-# - name: Check whether docker is already installed for window
-#   win_command: "docker version"
-#   failed_when: false
-#   changed_when: false
-#   register: version_check_result
-#   when: ansible_os_family=="Windows"
-
-# - set_fact:
-#     is_installed: "{{ version_check_result.rc == 0 }}"
-
-- include: "{{ ansible_os_family }}.yml"
+- name: Include window.yml in {{ ansible_distribution }}
+  include: window.yml
+  when: ansible_os_family=="Windows"
