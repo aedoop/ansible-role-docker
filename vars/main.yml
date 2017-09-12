@@ -1,2 +1,11 @@
 ---
 # vars file for docker
+
+docker_dir:
+  Windows:
+    tmp: C:\tmp
+
+docker_packages:
+  Windows:
+    file: docker.17.07.0.nupkg
+    url: ftp://10.0.250.100/pub/docker/window/docker.17.07.0.nupkg
