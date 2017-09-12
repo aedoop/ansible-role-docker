@@ -1,15 +1,15 @@
 ---
 
-- name: Check whether docker is already installed in {{ ansible_distribution }}
+- name: Check whether docker is already installed in {{ ansible_distribution }} by {{ docker_install_type }} install
   win_command: "docker"
   failed_when: false
   changed_when: false
   register: version_check_result
 
-- name: Set is_installed fact in {{ ansible_distribution }}
+- name: Set is_installed fact in {{ ansible_distribution }} by {{ docker_install_type }} install
   set_fact:
     is_installed: "{{ version_check_result.rc == 0 }}"
 
-- name: Include {{ ansible_os_family }}-{{ docker_install_type }}.yml in {{ ansible_distribution }}
+- name: Include {{ ansible_os_family }}-{{ docker_install_type }}.yml in {{ ansible_distribution }} by {{ docker_install_type }} install
   include: "{{ ansible_os_family }}-{{ docker_install_type }}.yml"
   when: not is_installed

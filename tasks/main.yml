@@ -1,10 +1,10 @@
 ---
 # tasks file for docker
 
-- name: Include linux.yml in {{ ansible_distribution }}
+- name: Include linux.yml in {{ ansible_distribution }} by {{ docker_install_type }} install
   include: linux.yml
   when: ansible_os_family!="Windows"
 
-- name: Include window.yml in {{ ansible_distribution }}
+- name: Include window.yml in {{ ansible_distribution }} by {{ docker_install_type }} install
   include: window.yml
   when: ansible_os_family=="Windows"

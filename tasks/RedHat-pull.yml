@@ -1,17 +1,17 @@
 ---
 
-- name: Install required packages for docker in {{ ansible_distribution }}
+- name: Install required packages for docker in {{ ansible_distribution }} by pull install
   yum: name={{ item }} state=present
   with_items:
     - yum-utils 
     - device-mapper-persistent-data 
     - lvm2
 
-- name: Set up the stable repository in {{ ansible_distribution }}
+- name: Set up the stable repository in {{ ansible_distribution }} by pull install
   command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-- name: Install docker in {{ ansible_distribution }}
+- name: Install docker in {{ ansible_distribution }} by pull install
   yum: name=docker-ce state=present
 
-- name: Make sure a service is running in {{ ansible_distribution }}
+- name: Make sure a service is running in {{ ansible_distribution }} by pull install
   systemd: name=docker state=started

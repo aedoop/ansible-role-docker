@@ -1,21 +1,21 @@
 ---
 
-- name: Set dir_info,pkg_info fact in {{ ansible_distribution }}
+- name: Set dir_info,pkg_info fact in {{ ansible_distribution }} by pull install
   set_fact:
     dir_info: "{{ docker_dir[ansible_os_family] }}"
     pkg_info: "{{ docker_packages[ansible_os_family] }}"
 
-- name: Check and create temp directory in {{ ansible_distribution }}
+- name: Check and create temp directory in {{ ansible_distribution }} by pull install
   win_file: path={{ item }} state=directory
   with_items:
     - "{{ dir_info.tmp }}"
 
-- name: Download docker install package in {{ ansible_distribution }}
+- name: Download docker install package in {{ ansible_distribution }} by pull install
   win_get_url: url={{ pkg_info.pull }} dest={{ dir_info.tmp }}//{{ pkg_info.file }}
 
-- name: Install docker in {{ ansible_distribution }}
+- name: Install docker in {{ ansible_distribution }} by pull install
   win_chocolatey: name=docker.install source={{ dir_info.tmp }} state=present
 
-- name: Remove docker install package in {{ ansible_distribution }}
+- name: Remove docker install package in {{ ansible_distribution }} by pull install
   win_file: path={{ dir_info.tmp }}//{{ pkg_info.file }} state=absent
 
